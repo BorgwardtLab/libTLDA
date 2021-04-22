@@ -261,8 +261,10 @@ class ImportanceWeightedClassifier(object):
             method='predict_proba'
         )
 
-        # Return predictions for source samples
-        return preds[:N]
+        # Return predictions for source samples; we return the
+        # probability for the sample to be a target sample, so
+        # we have to return the second component.
+        return preds[:N][:, 1]
 
     def iwe_nearest_neighbours(self, X, Z):
         """
